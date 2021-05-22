@@ -12,5 +12,11 @@ namespace Data
 
         public DbSet<Flight> Flights { get; set; }
         public DbSet<Transport> Transports { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Flight>().HasNoKey();
+        }
     }
 }
