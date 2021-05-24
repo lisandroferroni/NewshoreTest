@@ -1,5 +1,6 @@
 ﻿using Data;
 using Model;
+using Model.Entities;
 using Services.Interfaces;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -28,8 +29,10 @@ namespace Services
             return result;
         }
 
-        public async Task<bool> SaveFlight(RequestSaveFlight request)
+        public bool SaveFlight(RequestSaveFlight request)
         {
+            var transport = this.repo.GetTransport(request.FlightNumber);
+
             var flight = new Flight()
             {
                 ArrivalStation = request.ArrivalStation,
@@ -37,9 +40,9 @@ namespace Services
                 DepartureDate = request.DepartureDate,
                 DepartureStation = request.DepartureStation,
                 Price = request.Price,
-                Transport = new Transport() { FligthNumber = request.FlightNumber }
+                Transport = transport ?? new Transport() { FligthNumber = request.FlightNumber }
             };
-
+            
             repo.Add(flight);
 
             return true;

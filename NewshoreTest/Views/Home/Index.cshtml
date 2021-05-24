@@ -29,14 +29,17 @@
                 </div>
 
                 <div class="col-sm-4 form-group">
-                    <input class="input-group" type="date" name="FromDate" value="@DateTime.Now.ToString("dd/MM/yyyy")" />
+                    <input class="form-control" type="date" name="FromDate" value="@DateTime.Now.ToString("dd/MM/yyyy")" />
                 </div>
             </div>
 
             <div class="row">
-                <button class="btn btn-primary" type="submit">
-                    Buscar Vuelos
-                </button>
+                <div class="col-sm-12 text-right">
+                    <button class="btn btn-primary" type="submit">
+                        Buscar Vuelos
+                    </button>
+                </div>
+
             </div>
 
         </form>
@@ -45,10 +48,11 @@
     @if (Model != null)
     {
         @using Model
+        <br />
         <div class="container">
-            Disponibilidades de Vuelos
+            <h2>Disponibilidades de Vuelos</h2>
             <div>
-                <table class="">
+                <table class="table table-striped">
                     <thead>
                         <tr>
                             <th scope="col">Origen</th>
@@ -68,7 +72,7 @@
                                     @flight.ArrivalStation
                                 </td>
                                 <td>
-                                    @flight.DepartureDate
+                                    @flight.DepartureDate.ToShortDateString()
                                 </td>
                                 <td>
                                     <input type="button" value="Continuar" onclick="location.href='@Url.Action("SaveFlight", "Home", flight)'" />

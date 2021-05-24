@@ -7,6 +7,6 @@ namespace Services.Interfaces
     public interface IHomeService
     {
         public Task<List<ResponseFindFlights>> FindFlightsAsync(RequestFindFlights request);
-        public Task<bool> SaveFlight(RequestSaveFlight request);
+        public bool SaveFlight(RequestSaveFlight request);
     }
 }

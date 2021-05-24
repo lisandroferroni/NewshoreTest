@@ -1,0 +1,46 @@
+﻿@{
+    ViewData["Title"] = "Itinerary";
+}
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    @if (Model != null)
+    {
+        @using Model.Entities
+        <br />
+        <div class="container">
+            <h2>Pasajeros</h2>
+            <div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Numero</th>
+                            <th scope="col">Mail</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (Passenger passenger in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(m => passenger.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => passenger.Number)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => passenger.Mail)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Modificar", "UpdatePassenger", passenger)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+</div>

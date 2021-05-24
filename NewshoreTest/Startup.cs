@@ -28,6 +28,7 @@ namespace NewshoreTest
             services.AddTransient<IVivaAirAPIService, VivaAirAPIService>();
             services.AddHttpClient();
             services.AddTransient<INewShoreRepository, NewshoreRepository>();
+            services.AddTransient<IItineraryService, ItineraryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

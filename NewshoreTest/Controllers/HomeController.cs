@@ -25,7 +25,7 @@ namespace NewshoreTest.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Itinerary()
         {
             return View();
         }
@@ -37,9 +37,9 @@ namespace NewshoreTest.Controllers
             return View("Index", flights);
         }
 
-        public async Task<IActionResult> SaveFlight(RequestSaveFlight requestSaveFlight)
+        public IActionResult SaveFlight(RequestSaveFlight requestSaveFlight)
         {
-            var savedFlight = await this.homeService.SaveFlight(requestSaveFlight);
+            var savedFlight = this.homeService.SaveFlight(requestSaveFlight);
 
             return View("Index");
         }

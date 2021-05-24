@@ -4,14 +4,16 @@ using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Data.Migrations
 {
     [DbContext(typeof(NewshoreDbContext))]
-    partial class NewshoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210524083509_UpdatedMigration4")]
+    partial class UpdatedMigration4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -70,29 +72,6 @@ namespace Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Passengers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Mail = "jperez@gmail.com",
-                            Name = "Juan Perez",
-                            Number = 5493416335598L
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Mail = "mgarcia@gmail.com",
-                            Name = "Manuel Garcia",
-                            Number = 5493415887744L
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Mail = "alberto@gmail.com",
-                            Name = "Alberto Perez",
-                            Number = 5493415847744L
-                        });
                 });
 
             modelBuilder.Entity("Model.Entities.Reservation", b =>

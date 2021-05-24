@@ -4,14 +4,16 @@ using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Data.Migrations
 {
     [DbContext(typeof(NewshoreDbContext))]
-    partial class NewshoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210524033656_UpdatedMigration3")]
+    partial class UpdatedMigration3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -70,55 +72,6 @@ namespace Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Passengers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Mail = "jperez@gmail.com",
-                            Name = "Juan Perez",
-                            Number = 5493416335598L
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Mail = "mgarcia@gmail.com",
-                            Name = "Manuel Garcia",
-                            Number = 5493415887744L
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Mail = "alberto@gmail.com",
-                            Name = "Alberto Perez",
-                            Number = 5493415847744L
-                        });
-                });
-
-            modelBuilder.Entity("Model.Entities.Reservation", b =>
-                {
-                    b.Property<string>("PNR")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("FromDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("Passenger1Id")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Passenger2Id")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("ToDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("PNR");
-
-                    b.HasIndex("Passenger1Id");
-
-                    b.HasIndex("Passenger2Id");
-
-                    b.ToTable("Reservations");
                 });
 
             modelBuilder.Entity("Model.Entities.Transport", b =>
@@ -138,21 +91,6 @@ namespace Data.Migrations
                         .HasForeignKey("TransportFligthNumber");
 
                     b.Navigation("Transport");
-                });
-
-            modelBuilder.Entity("Model.Entities.Reservation", b =>
-                {
-                    b.HasOne("Model.Entities.Passenger", "Passenger1")
-                        .WithMany()
-                        .HasForeignKey("Passenger1Id");
-
-                    b.HasOne("Model.Entities.Passenger", "Passenger2")
-                        .WithMany()
-                        .HasForeignKey("Passenger2Id");
-
-                    b.Navigation("Passenger1");
-
-                    b.Navigation("Passenger2");
                 });
 #pragma warning restore 612, 618
         }
