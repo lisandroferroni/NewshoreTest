@@ -2,7 +2,87 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container-fluid">
+    <div class="container">
+        <form action="../Home/FindFlights" method="post">
+
+            <div class="row">
+
+                <div class="col-sm-4 form-group">
+                    <select class="form-control" name="Origin">
+                        <option disabled selected>Origen</option>
+                        <option value="MDE">Medellín</option>
+                        <option value="BOG">Bogotá</option>
+                        <option value="CTG">Cartagena</option>
+                        <option value="PEI">Pereira</option>
+                    </select>
+                </div>
+
+                <div class="col-sm-4 form-group">
+                    <select class="form-control" name="Destination">
+                        <option disabled selected>Destino</option>
+                        <option value="MDE">Medellín</option>
+                        <option value="BOG">Bogotá</option>
+                        <option value="CTG">Cartagena</option>
+                        <option value="PEI">Pereira</option>
+                    </select>
+                </div>
+
+                <div class="col-sm-4 form-group">
+                    <input class="form-control" type="date" name="FromDate" value="@DateTime.Now.ToString("dd/MM/yyyy")" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12 text-right">
+                    <button class="btn btn-primary" type="submit">
+                        Buscar Vuelos
+                    </button>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+
+    @if (Model != null)
+    {
+        @using Model
+        <br />
+        <div class="container">
+            <h2>Disponibilidades de Vuelos</h2>
+            <div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Origen</th>
+                            <th scope="col">Destino</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (ResponseFindFlights flight in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @flight.DepartureStation
+                                </td>
+                                <td>
+                                    @flight.ArrivalStation
+                                </td>
+                                <td>
+                                    @flight.DepartureDate.ToShortDateString()
+                                </td>
+                                <td>
+                                    <input type="button" value="Continuar" onclick="location.href='@Url.Action("SaveFlight", "Home", flight)'" />
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
 </div>

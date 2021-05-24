@@ -1,15 +1,12 @@
 using Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Services;
+using Services.Interfaces;
 
 namespace NewshoreTest
 {
@@ -27,6 +24,11 @@ namespace NewshoreTest
         {
             services.AddControllersWithViews();
             services.AddDbContext<NewshoreDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("NewshoreDBConnection")));
+            services.AddTransient<IHomeService, HomeService>();
+            services.AddTransient<IVivaAirAPIService, VivaAirAPIService>();
+            services.AddHttpClient();
+            services.AddTransient<INewShoreRepository, NewshoreRepository>();
+            services.AddTransient<IItineraryService, ItineraryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
